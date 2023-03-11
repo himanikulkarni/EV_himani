@@ -1,10 +1,11 @@
-import 'package:ev_screens/screens/recommendations.dart';
-
-import 'package:ev_screens/widgets/widgets/dropdowns/vehicle_type.dart';
-import 'package:ev_screens/widgets/widgets/dropdowns/brand.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:http/http.dart' as http;
+
+import 'package:ev_screens/screens/recommendations.dart';
+import 'package:ev_screens/widgets/widgets/dropdowns/brand.dart';
+import 'package:ev_screens/widgets/widgets/dropdowns/vehicle_type.dart';
 
 class Welcome extends StatefulWidget {
   const Welcome({super.key});
@@ -18,7 +19,116 @@ class _WelcomeState extends State<Welcome> {
   double dH = 0.0;
   double tS = 0.0;
   double _currentValue = 50000;
-  final bool _hasBeenPressed = false;
+
+  Future<void> _sendData() async {
+    var map = <String, dynamic>{};
+    map['vehicle_brand'] = "Maserati";
+    map['vehicle_type'] = "4 wheeler";
+    map['range'] = "11700000";
+    final url = Uri.parse('http://35.78.201.111:4001/vehicle/filter-vehicle');
+    final response = await http.post(
+      url,
+      body: map,
+    );
+
+    if (response.statusCode == 200) {
+      final responseBody = response.body;
+      print('Response: $responseBody');
+    } else {
+      print('Error: ${response.statusCode}');
+    }
+  }
+
+  Color _containerColor = Colors.white;
+  Color _textColor = Colors.green;
+
+  Color _container1Color = Colors.white;
+  Color _text1Color = Colors.green;
+
+  Color _container2Color = Colors.white;
+  Color _text2Color = Colors.green;
+
+  Color _container3Color = Colors.white;
+  Color _text3Color = Colors.green;
+
+  Color _container4Color = Colors.white;
+  Color _text4Color = Colors.green;
+
+  Color _container5Color = Colors.white;
+  Color _text5Color = Colors.green;
+
+  void _onContainerPressed() {
+    setState(() {
+      if (_containerColor == Colors.white) {
+        _containerColor = Colors.green;
+        _textColor = Colors.white;
+      } else {
+        _containerColor = Colors.white;
+        _textColor = Colors.green;
+      }
+    });
+  }
+
+  void _onContainer1Pressed() {
+    setState(() {
+      if (_container1Color == Colors.white) {
+        _container1Color = Colors.green;
+        _text1Color = Colors.white;
+      } else {
+        _container1Color = Colors.white;
+        _text1Color = Colors.green;
+      }
+    });
+  }
+
+  void _onContainer2Pressed() {
+    setState(() {
+      if (_container2Color == Colors.white) {
+        _container2Color = Colors.green;
+        _text2Color = Colors.white;
+      } else {
+        _container2Color = Colors.white;
+        _text2Color = Colors.green;
+      }
+    });
+  }
+
+  void _onContainer3Pressed() {
+    setState(() {
+      if (_container3Color == Colors.white) {
+        _container3Color = Colors.green;
+        _text3Color = Colors.white;
+      } else {
+        _container3Color = Colors.white;
+        _text3Color = Colors.green;
+      }
+    });
+  }
+
+  void _onContainer4Pressed() {
+    setState(() {
+      if (_container4Color == Colors.white) {
+        _container4Color = Colors.green;
+        _text4Color = Colors.white;
+      } else {
+        _container4Color = Colors.white;
+        _text4Color = Colors.green;
+      }
+    });
+  }
+
+  void _onContainer5Pressed() {
+    setState(() {
+      if (_container5Color == Colors.white) {
+        _container5Color = Colors.green;
+        _text5Color = Colors.white;
+      } else {
+        _container5Color = Colors.white;
+        _text5Color = Colors.green;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     dW = MediaQuery.of(context).size.width;
@@ -244,60 +354,72 @@ class _WelcomeState extends State<Welcome> {
                   padding: const EdgeInsets.only(left: 18, right: 18),
                   child: Row(
                     children: [
-                      Container(
-                        width: dW * 0.25,
-                        height: dH * 0.06,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.green, width: 1.5),
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(7.0)),
-                        child: Center(
-                          child: Text(
-                            "Actively",
-                            style: GoogleFonts.poppins(
-                                color: Colors.green,
-                                fontSize: tS * 16,
-                                fontWeight: FontWeight.w500),
+                      InkWell(
+                        onTap: _onContainerPressed,
+                        child: Container(
+                          width: dW * 0.25,
+                          height: dH * 0.06,
+                          decoration: BoxDecoration(
+                              border:
+                                  Border.all(color: Colors.green, width: 1.5),
+                              color: _containerColor,
+                              borderRadius: BorderRadius.circular(7.0)),
+                          child: Center(
+                            child: Text(
+                              "Actively",
+                              style: GoogleFonts.poppins(
+                                  color: _textColor,
+                                  fontSize: tS * 16,
+                                  fontWeight: FontWeight.w500),
+                            ),
                           ),
                         ),
                       ),
                       SizedBox(
                         width: dW * 0.04,
                       ),
-                      Container(
-                        width: dW * 0.25,
-                        height: dH * 0.06,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.green, width: 1.5),
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(7.0)),
-                        child: Center(
-                          child: Text(
-                            "15 Days",
-                            style: GoogleFonts.poppins(
-                                color: Colors.green,
-                                fontSize: tS * 16,
-                                fontWeight: FontWeight.w500),
+                      InkWell(
+                        onTap: _onContainer1Pressed,
+                        child: Container(
+                          width: dW * 0.25,
+                          height: dH * 0.06,
+                          decoration: BoxDecoration(
+                              border:
+                                  Border.all(color: Colors.green, width: 1.5),
+                              color: _container1Color,
+                              borderRadius: BorderRadius.circular(7.0)),
+                          child: Center(
+                            child: Text(
+                              "15 Days",
+                              style: GoogleFonts.poppins(
+                                  color: _text1Color,
+                                  fontSize: tS * 16,
+                                  fontWeight: FontWeight.w500),
+                            ),
                           ),
                         ),
                       ),
                       SizedBox(
                         width: dW * 0.04,
                       ),
-                      Container(
-                        width: dW * 0.25,
-                        height: dH * 0.06,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.green, width: 1.5),
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(7.0)),
-                        child: Center(
-                          child: Text(
-                            "1 Month",
-                            style: GoogleFonts.poppins(
-                                color: Colors.green,
-                                fontSize: tS * 16,
-                                fontWeight: FontWeight.w500),
+                      InkWell(
+                        onTap: _onContainer2Pressed,
+                        child: Container(
+                          width: dW * 0.25,
+                          height: dH * 0.06,
+                          decoration: BoxDecoration(
+                              border:
+                                  Border.all(color: Colors.green, width: 1.5),
+                              color: _container2Color,
+                              borderRadius: BorderRadius.circular(7.0)),
+                          child: Center(
+                            child: Text(
+                              "1 Month",
+                              style: GoogleFonts.poppins(
+                                  color: _text2Color,
+                                  fontSize: tS * 16,
+                                  fontWeight: FontWeight.w500),
+                            ),
                           ),
                         ),
                       ),
@@ -311,60 +433,72 @@ class _WelcomeState extends State<Welcome> {
                   padding: const EdgeInsets.only(left: 18, right: 18),
                   child: Row(
                     children: [
-                      Container(
-                        width: dW * 0.25,
-                        height: dH * 0.06,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.green, width: 1.5),
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(7.0)),
-                        child: Center(
-                          child: Text(
-                            "6 Months",
-                            style: GoogleFonts.poppins(
-                                color: Colors.green,
-                                fontSize: tS * 16,
-                                fontWeight: FontWeight.w500),
+                      InkWell(
+                        onTap: _onContainer3Pressed,
+                        child: Container(
+                          width: dW * 0.25,
+                          height: dH * 0.06,
+                          decoration: BoxDecoration(
+                              border:
+                                  Border.all(color: Colors.green, width: 1.5),
+                              color: _container3Color,
+                              borderRadius: BorderRadius.circular(7.0)),
+                          child: Center(
+                            child: Text(
+                              "6 Months",
+                              style: GoogleFonts.poppins(
+                                  color: _text3Color,
+                                  fontSize: tS * 16,
+                                  fontWeight: FontWeight.w500),
+                            ),
                           ),
                         ),
                       ),
                       SizedBox(
                         width: dW * 0.04,
                       ),
-                      Container(
-                        width: dW * 0.25,
-                        height: dH * 0.06,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.green, width: 1.5),
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(7.0)),
-                        child: Center(
-                          child: Text(
-                            ">6 Months",
-                            style: GoogleFonts.poppins(
-                                color: Colors.green,
-                                fontSize: tS * 16,
-                                fontWeight: FontWeight.w500),
+                      InkWell(
+                        onTap: _onContainer4Pressed,
+                        child: Container(
+                          width: dW * 0.25,
+                          height: dH * 0.06,
+                          decoration: BoxDecoration(
+                              border:
+                                  Border.all(color: Colors.green, width: 1.5),
+                              color: _container4Color,
+                              borderRadius: BorderRadius.circular(7.0)),
+                          child: Center(
+                            child: Text(
+                              ">6 Months",
+                              style: GoogleFonts.poppins(
+                                  color: _text4Color,
+                                  fontSize: tS * 16,
+                                  fontWeight: FontWeight.w500),
+                            ),
                           ),
                         ),
                       ),
                       SizedBox(
                         width: dW * 0.04,
                       ),
-                      Container(
-                        width: dW * 0.25,
-                        height: dH * 0.06,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.green, width: 1.5),
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(7.0)),
-                        child: Center(
-                          child: Text(
-                            "Not Decided",
-                            style: GoogleFonts.poppins(
-                                color: Colors.green,
-                                fontSize: tS * 15,
-                                fontWeight: FontWeight.w500),
+                      InkWell(
+                        onTap: _onContainer5Pressed,
+                        child: Container(
+                          width: dW * 0.25,
+                          height: dH * 0.06,
+                          decoration: BoxDecoration(
+                              border:
+                                  Border.all(color: Colors.green, width: 1.5),
+                              color: _container5Color,
+                              borderRadius: BorderRadius.circular(7.0)),
+                          child: Center(
+                            child: Text(
+                              "Not Decided",
+                              style: GoogleFonts.poppins(
+                                  color: _text5Color,
+                                  fontSize: tS * 15,
+                                  fontWeight: FontWeight.w500),
+                            ),
                           ),
                         ),
                       ),
@@ -376,6 +510,7 @@ class _WelcomeState extends State<Welcome> {
                 ),
                 InkWell(
                   onTap: () {
+                    _sendData();
                     Navigator.push(
                       context,
                       MaterialPageRoute(
